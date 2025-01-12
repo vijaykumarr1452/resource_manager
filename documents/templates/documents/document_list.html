@@ -1,0 +1,52 @@
+
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Your Documents</h1>
+
+    {% if documents %}
+      <ul class="space-y-6">
+        {% for document in documents %}
+          <li class="border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md">
+            <h2 class="text-xl font-semibold text-gray-800">{{ document.title }}</h2>
+            <p class="text-gray-600">{{ document.description }}</p>
+            <p class="text-sm text-gray-500">
+              Uploaded by <strong>{{ document.user.username }}</strong> on {{ document.uploaded_at|date:"F j, Y" }}
+            </p>
+            <p class="text-sm text-gray-500">URL: <a href="{{ document.doc_url }}" class="text-indigo-600 hover:underline">Redirect ME</a></p>
+            
+            <div class="mt-4 space-x-4">
+              <a href="{{ document.file.url }}" class="inline-block py-2 px-4 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500">
+                Download
+              </a>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-center text-gray-500">You don't have any documents uploaded yet.</p>
+    {% endif %}
+  </div>
+{% endblock %}
+
+
+<!-- {% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Your Documents</h1>
+  <ul>
+    {% for document in documents %}
+      <li>
+        <h2>{{ document.title }}</h2>
+        <p>{{ document.description }}</p>
+        <p>Uploaded by {{ document.user.username }} on {{ document.upload_date }}</p>
+        <p> Url - <a href="{{document.doc_url }}">Redirect ME</a> </p>
+        <p>Uploaded on: {{ document.uploaded_at }}</p>
+        <a href="{{ document.file.url }}">Download</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %} -->
+
+
